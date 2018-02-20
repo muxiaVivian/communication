@@ -7,23 +7,14 @@ import com.vivian.commnication.enums.TransportType;
 import java.util.Map;
 
 public class Config {
+    private String configId;
     private Topic topic;
-    private String publisherHost;
-    private String publisherPort;
     private Protocol protocol;
     private TransportType transportType;
     private Map<String, String> TransportParameter;
 
     public Topic getTopic() {
         return topic;
-    }
-
-    public String getPublisherHost() {
-        return publisherHost;
-    }
-
-    public String getPublisherPort() {
-        return publisherPort;
     }
 
     public Protocol getProtocol() {
@@ -36,5 +27,9 @@ public class Config {
 
     public Map<String, String> getTransportParameter() {
         return TransportParameter;
+    }
+
+    public String getConfigId() {
+        return configId;
     }
 }
