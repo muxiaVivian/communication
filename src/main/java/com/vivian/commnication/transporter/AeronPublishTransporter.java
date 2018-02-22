@@ -1,20 +1,35 @@
 package com.vivian.commnication.transporter;
 
 import com.vivian.commnication.enums.AeronConfig;
+import com.vivian.commnication.transporter.aeron.AeronManager;
+import io.aeron.Publication;
+import org.agrona.BufferUtil;
+import org.agrona.concurrent.UnsafeBuffer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
 public class AeronPublishTransporter implements IPublishTransporter {
+    //TODO: research size of buffer
+    private static final UnsafeBuffer BUFFER = new UnsafeBuffer(BufferUtil.allocateDirectAligned(256, 64));
     private int streamId;
     private String channel;
+    private Publication publication;
+
+    @Autowired
+    private AeronManager aeronManager;
 
     public AeronPublishTransporter(Map<String, String> transportConfig){
         streamId = Integer.valueOf(transportConfig.get(AeronConfig.STREAM_ID.toString()));
         channel = transportConfig.get(AeronConfig.CHANNEL.toString());
+        publication = aeronManager.getAeron().addPublication(channel, streamId);
     }
 
     @Override
-    public void publish(Object object) {
+    public void publish(byte[] message) {
+        //TODO: confirm how to get byte of message
+        BUFFER.putBytes(0, message);
+        publication.offer(BUFFER, 0, message.length);
 
     }
 }
