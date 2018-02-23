@@ -1,0 +1,16 @@
+com\vivian\commnication\transporter\aeron\AeronManager.class
+com\vivian\commnication\serializer\SBESerializer.class
+com\vivian\commnication\transporter\AeronPublishTransporter.class
+com\vivian\commnication\config\Config.class
+com\vivian\commnication\publisher\factory\IPublisherFactory.class
+com\vivian\commnication\enums\TransportType.class
+com\vivian\commnication\enums\AeronConfig.class
+com\vivian\commnication\transporter\IPublishTransporter.class
+com\vivian\commnication\publisher\IPublisher.class
+com\vivian\commnication\serializer\ISerializer.class
+com\vivian\commnication\subscriber\factory\ISubscriberFactory.class
+com\vivian\commnication\Application.class
+com\vivian\commnication\enums\Topic.class
+com\vivian\commnication\subscriber\ISubscriber.class
+com\vivian\commnication\enums\Protocol.class
+com\vivian\commnication\serializer\ProtobufSerializer.class
