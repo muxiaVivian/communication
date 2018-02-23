@@ -13,6 +13,14 @@ public class Config {
     private TransportType transportType;
     private Map<String, String> TransportParameter;
 
+    public Config(String configId, Topic topic, Protocol protocol, TransportType transportType, Map<String, String> transportParameter) {
+        this.configId = configId;
+        this.topic = topic;
+        this.protocol = protocol;
+        this.transportType = transportType;
+        TransportParameter = transportParameter;
+    }
+
     public Topic getTopic() {
         return topic;
     }
