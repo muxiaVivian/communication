@@ -6,9 +6,13 @@ import io.aeron.Publication;
 import org.agrona.BufferUtil;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Component
+@Scope("prototype")
 public class AeronPublishTransporter implements PublishTransporter {
     //TODO: research size of buffer
     private static final UnsafeBuffer BUFFER = new UnsafeBuffer(BufferUtil.allocateDirectAligned(256, 64));

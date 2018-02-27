@@ -9,6 +9,8 @@ import io.aeron.samples.SamplesUtil;
 import org.agrona.concurrent.BackoffIdleStrategy;
 import org.agrona.concurrent.IdleStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +18,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.aeron.samples.SampleConfiguration.FRAGMENT_COUNT_LIMIT;
 
+@Component
+@Scope("prototype")
 public class AeronSubscribeTransporter implements SubscribeTransporter {
     private final AtomicBoolean running = new AtomicBoolean(true);
     private int streamId;
