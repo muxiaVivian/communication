@@ -2,6 +2,7 @@ package com.vivian.commnication.transporter.aeron;
 
 import com.vivian.commnication.enums.AeronConfig;
 import com.vivian.commnication.transporter.PublishTransporter;
+import com.vivian.commnication.transporter.Transporter;
 import io.aeron.Publication;
 import org.agrona.BufferUtil;
 import org.agrona.concurrent.UnsafeBuffer;
@@ -23,11 +24,7 @@ public class AeronPublishTransporter implements PublishTransporter {
     @Autowired
     private AeronManager aeronManager;
 
-    public AeronPublishTransporter(Map<String, String> transportConfig){
-        streamId = Integer.valueOf(transportConfig.get(AeronConfig.STREAM_ID.toString()));
-        channel = transportConfig.get(AeronConfig.CHANNEL.toString());
-        publication = aeronManager.getAeron().addPublication(channel, streamId);
-    }
+    public AeronPublishTransporter(){}
 
     @Override
     public void publish(byte[] message) {
@@ -35,5 +32,12 @@ public class AeronPublishTransporter implements PublishTransporter {
         BUFFER.putBytes(0, message);
         publication.offer(BUFFER, 0, message.length);
 
+    }
+
+    @Override
+    public void initTransporter(Map<String, String> transportConfig) {
+        streamId = Integer.valueOf(transportConfig.get(AeronConfig.STREAM_ID.toString()));
+        channel = transportConfig.get(AeronConfig.CHANNEL.toString());
+        publication = aeronManager.getAeron().addPublication(channel, streamId);
     }
 }

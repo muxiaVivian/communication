@@ -3,7 +3,7 @@ package com.vivian.commnication.publisher;
 import com.vivian.commnication.serializer.Serializer;
 import com.vivian.commnication.transporter.PublishTransporter;
 
-public class SimplePublisher implements IPublisher{
+public class SimplePublisher implements Publisher {
     private PublishTransporter transporter;
     private Serializer serializer;
 

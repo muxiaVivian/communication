@@ -20,7 +20,9 @@ public class TransporterFactory {
         try {
             String transportorClassName = StaticConfig.getSubscribeTransportorClassName(config.getTransportType());
             Class transportorClass = Class.forName(transportorClassName);
-            return (SubscribeTransporter)context.getBean(transportorClass, config.getTransportParameter());
+            SubscribeTransporter subscribeTransporter = (SubscribeTransporter)context.getBean(transportorClass);
+            subscribeTransporter.initTransporter(config.getTransportParameter());
+            return subscribeTransporter;
         } catch (Exception e) {
             LOGGER.error("Failed to create transportor=> {}", e);
         }
@@ -31,7 +33,9 @@ public class TransporterFactory {
         try {
             String transportorClassName = StaticConfig.getPublishTransportorClassName(config.getTransportType());
             Class transportorClass = Class.forName(transportorClassName);
-            return (PublishTransporter)context.getBean(transportorClass, config.getTransportParameter());
+            PublishTransporter publishTransporter = (PublishTransporter)context.getBean(transportorClass);
+            publishTransporter.initTransporter(config.getTransportParameter());
+            return publishTransporter;
         } catch (Exception e) {
             LOGGER.error("Failed to create transportor=> {}", e);
         }

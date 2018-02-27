@@ -1,5 +1,5 @@
 package com.vivian.commnication.publisher;
 
-public interface IPublisher {
+public interface Publisher {
     void publish(Object message);
 }

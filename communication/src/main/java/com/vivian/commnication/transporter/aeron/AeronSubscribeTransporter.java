@@ -2,7 +2,6 @@ package com.vivian.commnication.transporter.aeron;
 
 import com.vivian.commnication.enums.AeronConfig;
 import com.vivian.commnication.transporter.SubscribeTransporter;
-import io.aeron.FragmentAssembler;
 import io.aeron.Subscription;
 import io.aeron.logbuffer.FragmentHandler;
 import io.aeron.samples.SamplesUtil;
@@ -11,6 +10,7 @@ import org.agrona.concurrent.IdleStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import com.vivian.commnication.transporter.Transporter;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,11 +29,6 @@ public class AeronSubscribeTransporter implements SubscribeTransporter {
     @Autowired
     private AeronManager aeronManager;
 
-    public AeronSubscribeTransporter(Map<String, String> transportConfig){
-        streamId = Integer.valueOf(transportConfig.get(AeronConfig.STREAM_ID.toString()));
-        channel = transportConfig.get(AeronConfig.CHANNEL.toString());
-        subscription = aeronManager.getAeron().addSubscription(channel, streamId);
-    }
 
     @Override
     public void tearDown() {
@@ -53,5 +48,12 @@ public class AeronSubscribeTransporter implements SubscribeTransporter {
             }
         });
         thread.start();
+    }
+
+    @Override
+    public void initTransporter(Map<String, String> transportConfig) {
+        streamId = Integer.valueOf(transportConfig.get(AeronConfig.STREAM_ID.toString()));
+        channel = transportConfig.get(AeronConfig.CHANNEL.toString());
+        subscription = aeronManager.getAeron().addSubscription(channel, streamId);
     }
 }
